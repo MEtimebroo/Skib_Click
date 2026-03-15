@@ -8,71 +8,91 @@ const upgrades = [
         cost: 10,
         income: 1,
         owned: 0,
-        button: document.getElementById("one")
+        button: document.getElementById("one"),
+        costSpan: document.getElementById("uno"),
+        incSpan: document.getElementById("unr"),
+        ownSpan: document.getElementById("on")
     },
     {
         name: "Cameraman",
-        cost: 30,
+        cost: 40,
         income: 5,
         owned: 0,
-        button: document.getElementById("five")
+        button: document.getElementById("five"),
+        costSpan: document.getElementById("cinco"),
+        incSpan: document.getElementById("fivr"),
+        ownSpan: document.getElementById("onf")
     },
     {
         name: "Speakerman",
-        cost: 80,
+        cost: 160,
         income: 10,
         owned: 0,
-        button: document.getElementById("ten")
+        button: document.getElementById("ten"),
+        costSpan: document.getElementById("diez"),
+        incSpan: document.getElementById("tenr"),
+        ownSpan: document.getElementById("ont")
     },
     {
         name: "Astro Toilet",
-        cost: 200,
+        cost: 640,
         income: 30,
         owned: 0,
-        button: document.getElementById("three")
+        button: document.getElementById("three"),
+        costSpan: document.getElementById("treinta"),
+        incSpan: document.getElementById("thr"),
+        ownSpan: document.getElementById("onth")
     },
     {
         name: "Titan TV Man",
-        cost: 500,
+        cost: 2560,
         income: 60,
         owned: 0,
-        button: document.getElementById("six")
+        button: document.getElementById("six"),
+        costSpan: document.getElementById("sesenta"),
+        incSpan: document.getElementById("sixr"),
+        ownSpan: document.getElementById("ons")
     },
     {
         name: "Titan Speakerman",
-        cost: 1000,
+        cost: 10240,
         income: 120,
         owned: 0,
-        button: document.getElementById("twelve")
+        button: document.getElementById("twelve"),
+        costSpan: document.getElementById("ciento-vente"),
+        incSpan: document.getElementById("twelvr"),
+        ownSpan: document.getElementById("ontw")
     }
-];
-
-//cost spans array
-const spanVals = [
-    document.getElementById("uno"),
-    document.getElementById("cinco"),
-    document.getElementById("diez"),
-    document.getElementById("treinta"),
-    document.getElementById("sesenta"),
-    document.getElementById("ciento-vente")
 ];
 
 function updateAllUpgrades() {
     for (let i = 0; i < upgrades.length; i++) {
         upgradeAppearance(i);
-    }
-}
+    };
+};
 
 //score values
 const count = document.getElementById("score");
 let score = 0;
 
+//update costs
 function upgradeCost(index) {
-    spanVals[index].innerText = upgrades[index].cost;
+    upgrades[index].costSpan.innerText = upgrades[index].cost;
+};
+
+//update incomes
+function upgradeInc(index) {
+    upgrades[index].incSpan.innerText = upgrades[index].income;
+};
+
+//update amount owned
+function upgradeOwn(index) {
+    upgrades[index].ownSpan.innerText = upgrades[index].owned;
 };
 
 for (let i = 0; i < upgrades.length; i++) {
     upgradeCost(i);
+    upgradeInc(i);
 };
 
 for (let i = 0; i < upgrades.length; i++) {
@@ -104,7 +124,7 @@ function upgradeAppearance(index) {
     }
 };
 
-//buy the upgrade and scale the cost
+//buy the upgrade and scale the cost and income
 function buyUpgrade(index) {
     let upgrade = upgrades[index];
 
@@ -113,9 +133,12 @@ function buyUpgrade(index) {
         upgrade.owned += 1;
 
         upgrade.cost = Math.floor(upgrade.cost * 1.2);
+        upgrade.income = Math.ceil(upgrade.income * 1.1);
 
         updateScore();
         upgradeCost(index);
+        upgradeInc(index);
+        upgradeOwn(index);
         for (let i = 0; i < upgrades.length; i++) {
             upgradeAppearance(i);
         };
@@ -132,7 +155,7 @@ upgrades.forEach((upgrade, index) => {
 setInterval(function() {
     let totalIncome = 0;
 
-    for (i = 0; i < upgrades.length; i++) {
+    for (let i = 0; i < upgrades.length; i++) {
         totalIncome += upgrades[i].income * upgrades[i].owned;
     }
 
