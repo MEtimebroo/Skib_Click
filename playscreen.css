@@ -1,0 +1,122 @@
+body {
+    display: flex;
+    font-family: 'Papyrus', sans-serif;
+    background-color: bisque;
+    flex-direction: column;
+    align-items: center;
+    color: darkslategray;
+    padding-top: 10vh;
+    touch-action: none;
+}
+
+header {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    background-color: blanchedalmond;
+    border-bottom: 2px solid whitesmoke;
+    color: darkslategray;
+    text-align: center;
+    height: 15vh;
+}
+
+.but {
+    margin-top: 10vh;
+    padding-left: 1.9vw;
+    padding-right: 1.9vw;
+    padding-top: 3.9vh;
+    padding-bottom: 3.9vh;
+    background-color: coral;
+    color: cadetblue;
+    border-radius: 5px;
+    font-size: large;
+    border-bottom: 2px solid chocolate;
+    border-right: 2px solid chocolate;
+    border-left: none;
+    border-top: none;
+}
+
+.but:hover {
+    border: none;
+    padding-left: 2vw;
+    padding-right: 2vw;
+    padding-top: 4vh;
+    padding-bottom: 4vh;
+}
+
+#butleft, #butright {
+    min-height: 100vh;
+}
+
+#butleft {
+    position: absolute;
+    height: 100%;
+    left: 0;
+    top: 0;
+    background-color: blanchedalmond;
+    border: 2px solid whitesmoke;
+    display: block;
+    width: 25vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 5vh;
+    min-width: 250px;
+}
+
+#butright {
+    position: absolute;
+    height: 100%;
+    right: 0;
+    top: 0;
+    background-color: blanchedalmond;
+    border: 2px solid whitesmoke;
+    display: block;
+    width: 25vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 5vh;
+    min-width: 250px;
+}
+
+h3 {
+    margin-top: 10vh;
+}
+
+@media (max-width: 768px) {
+    #upgrades-1, upgrades-2 {
+        min-height: auto;
+    }
+    
+    #upgrades-1 {
+        display: flex;
+        position: relative;
+        height: 10vh;
+        width: 100%;
+        flex-direction: row;
+        left: 0;
+        right: 0;
+        justify-content: center;
+    }
+
+    #upgrades-2 {
+        display: flex;
+        position: relative;
+        height: 16vh;
+        width: 100%;
+        bottom: 0;
+        left: 0;
+        top: auto;
+        flex-direction: row;
+        right: 0;
+        justify-content: center;
+        padding-bottom: 2.5vh;
+    }
+
+    #header {
+        height: 15vh;
+        padding-bottom: 2vh;
+    }
+}
