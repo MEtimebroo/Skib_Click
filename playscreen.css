@@ -98,6 +98,21 @@ h3 {
     margin-top: 10vh;
 }
 
+#reset {
+    bottom: 0;
+    background-color: blanchedalmond;
+    border: 2px solid whitesmoke;
+    border-radius: 3px;
+    padding: 1vh;
+    color: darkslategray;
+    transition: transform 0.3s ease;
+}
+
+#reset:hover {
+    transform: scale(1.2);
+    background-color: bisque;
+}
+
 @media (max-width: 768px) {
     #butdiv {
         padding-bottom: 10vh;
