@@ -33,7 +33,7 @@ pass.addEventListener("keyup", function(event) {
         let passValue = pass.value.toLowerCase();
 
         if (userValue == nam && passValue == word) {
-            location.href = "play-screen.html";
+            location.href = "playscreen.html";
             ah.style.display = "none";
         } else {
             ah.style.display = "block";
