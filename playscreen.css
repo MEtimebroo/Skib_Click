@@ -96,9 +96,12 @@ h3 {
         height: 10vh;
         width: 100%;
         flex-direction: row;
+        margin-top: 10vh;
         left: 0;
         right: 0;
         justify-content: center;
+        align-content: space-between;
+        padding-bottom: 5vh;
     }
 
     #butright {
@@ -108,15 +111,35 @@ h3 {
         width: 100%;
         bottom: 0;
         left: 0;
-        top: auto;
+        right: 0;
         flex-direction: row;
         right: 0;
         justify-content: center;
-        padding-bottom: 2.5vh;
+        align-content: space-between;
+        padding-top: 1vh;
+        padding-bottom: 1vh;
     }
 
     header {
         height: 15vh;
         padding-bottom: 2vh;
+    }
+
+    .but {
+        margin-top: 0vh;
+        margin-left: 2vw;
+        margin-right: 2vw;
+        padding-top: 2vh;
+        padding-bottom: 2vh;
+        padding-left: 1vw;
+        padding-right: 1vw;
+        font-size: medium;
+    }
+
+    .but:hover {
+        padding-top: 1.9vh;
+        padding-bottom: 1.9vh;
+        padding-left: 0.9vw;
+        padding-right: 0.9vw;
     }
 }
