@@ -65,6 +65,69 @@ const upgrades = [
     }
 ];
 
+//save game
+function saveGame() {
+    const saveData = {
+        score: score,
+        upgrades: upgrades.map(u => ({
+            cost: u.cost,
+            income: u.income,
+            owned: u.owned
+        })),
+        lastUpdate: Date.now()
+    };
+
+    localStorage.setItem("clickerSave", JSON.stringify(saveData));
+};
+
+//load game
+function loadGame() {
+    let save = localStorage.getItem("clickerSave");
+
+    if (!save) return;
+
+    let data = JSON.parse(save);
+
+    score = data.score;
+
+    data.upgrades.forEach((savedUpgrade, index) => {
+        upgrades[index].cost = savedUpgrade.cost;
+        upgrades[index].income = savedUpgrade.income;
+        upgrades[index].owned = savedUpgrade.owned;
+    });
+
+    upgrades.forEach((u, i) => {
+        upgradeCost(i);
+        upgradeInc(i);
+        upgradeOwn(i);
+    });
+
+    //offline stuff
+    let now = Date.now();
+    let diff = (now - data.lastUpdate) / 1000;
+
+    let totalIncome = 0;
+
+    upgrades.forEach(up => {
+        totalIncome += up.income * up.owned;
+    });
+
+    score += totalIncome * diff;
+}
+
+//reset the game
+function resetGame() {
+  localStorage.removeItem("clickerSave");
+  location.reload();
+}
+
+document.getElementById("reset").addEventListener("click", function(e) {
+    e.preventDefault;
+    resetGame();
+});
+
+setInterval(saveGame, 3000);
+
 function updateAllUpgrades() {
     for (let i = 0; i < upgrades.length; i++) {
         upgradeAppearance(i);
@@ -163,3 +226,9 @@ setInterval(function() {
     updateScore();
     updateAllUpgrades();
 }, 1000);
+
+loadGame();
+updateScore();
+updateAllUpgrades();
+
+window.addEventListener("beforeunload", saveGame());
