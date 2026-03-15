@@ -86,11 +86,11 @@ h3 {
 }
 
 @media (max-width: 768px) {
-    #upgrades-1, upgrades-2 {
+    #butleft, #butright {
         min-height: auto;
     }
     
-    #upgrades-1 {
+    #butleft {
         display: flex;
         position: relative;
         height: 10vh;
@@ -101,7 +101,7 @@ h3 {
         justify-content: center;
     }
 
-    #upgrades-2 {
+    #butright {
         display: flex;
         position: relative;
         height: 16vh;
@@ -115,7 +115,7 @@ h3 {
         padding-bottom: 2.5vh;
     }
 
-    #header {
+    header {
         height: 15vh;
         padding-bottom: 2vh;
     }
