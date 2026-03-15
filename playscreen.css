@@ -6,7 +6,7 @@ body {
     align-items: center;
     color: darkslategray;
     padding-top: 10vh;
-    touch-action: none;
+    touch-action: manipulation;
 }
 
 header {
