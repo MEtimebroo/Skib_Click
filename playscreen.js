@@ -25,7 +25,7 @@ const upgrades = [
     },
     {
         name: "Speakerman",
-        cost: 160,
+        cost: 320,
         income: 10,
         owned: 0,
         button: document.getElementById("ten"),
@@ -35,7 +35,7 @@ const upgrades = [
     },
     {
         name: "Astro Toilet",
-        cost: 640,
+        cost: 5120,
         income: 30,
         owned: 0,
         button: document.getElementById("three"),
@@ -45,7 +45,7 @@ const upgrades = [
     },
     {
         name: "Titan TV Man",
-        cost: 2560,
+        cost: 163840,
         income: 60,
         owned: 0,
         button: document.getElementById("six"),
@@ -55,7 +55,7 @@ const upgrades = [
     },
     {
         name: "Titan Speakerman",
-        cost: 10240,
+        cost: 10485760,
         income: 120,
         owned: 0,
         button: document.getElementById("twelve"),
@@ -196,8 +196,8 @@ function buyUpgrade(index) {
         score -= upgrade.cost;
         upgrade.owned += 1;
 
-        upgrade.cost = Math.floor(upgrade.cost * 1.2);
-        upgrade.income = Math.ceil(upgrade.income * 1.1);
+        upgrade.cost = Math.ceil(upgrade.cost * 1.3);
+        upgrade.income = Math.ceil(upgrade.income * 1.15);
 
         updateScore();
         upgradeCost(index);
