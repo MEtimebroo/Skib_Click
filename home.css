@@ -79,6 +79,23 @@ h1 {
     color: red;
 }
 
+.plbut {
+    background-color: transparent;
+    color: darkslategray;
+    border: 2px solid bisque;
+    border-radius: 3px;
+    padding: 2vh 2vw;
+    transition: transform 0.3s ease;
+    margin-bottom: 10vh;
+    margin-top: 4vh;
+    font-size: large;
+}
+
+.plbut:hover {
+    background: rgba(0, 0, 0, 0.5);
+    transform: scale(1.2); 
+}
+
 @media (max-width: 768px) {
     h1 {
         font-size: 3rem;
@@ -95,6 +112,10 @@ h1 {
 
     #login {
         width: 70vw;
+    }
+
+    .plbut {
+        padding: 2vh 6vw;
     }
 }
 
