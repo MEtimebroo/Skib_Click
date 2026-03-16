@@ -1,15 +1,17 @@
-const play = document.getElementById("log");
-//const sign = document.getElementById("no-log");
+const play = document.getElementById("play");
+/*const sign = document.getElementById("no-log");
 const span = document.getElementById("span");
 const user = document.getElementById("user");
 const pass = document.getElementById("pass");
 const span1 = document.getElementById("span-1");
 const ah = document.getElementById("ah");
 const nam = "owner";
-const word = "iamowner";
+const word = "iamowner";*/
 
 play.addEventListener('click', function() {
-    let userValue = user.value.toLowerCase();
+    location.href = "playscreen.html";
+
+    /*let userValue = user.value.toLowerCase();
     let passValue = pass.value.toLowerCase();
 
     if (userValue == nam && passValue == word) {
@@ -18,7 +20,7 @@ play.addEventListener('click', function() {
     } else {
         ah.style.display = "block";
         console.log(userValue, passValue);
-    }
+    }*/
 })
 
 /*sign.addEventListener('click', function() {
