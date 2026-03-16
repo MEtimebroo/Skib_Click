@@ -113,6 +113,7 @@ function loadGame() {
     });
 
     score += totalIncome * diff;
+    score = Math.floor(score);
 }
 
 //reset the game
