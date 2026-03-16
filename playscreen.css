@@ -187,6 +187,7 @@ h3 {
     }
 
     .ver {
+        position: static;
         bottom: auto;
     }
 }
