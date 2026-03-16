@@ -19,6 +19,7 @@ header {
     color: darkslategray;
     text-align: center;
     height: 15vh;
+    padding-bottom: 1vh;
 }
 
 #butdiv { 
@@ -29,10 +30,7 @@ header {
 }
 
 .but {
-    padding-left: 1.9vw;
-    padding-right: 1.9vw;
-    padding-top: 3.9vh;
-    padding-bottom: 3.9vh;
+    padding: 3.9vh 1.9vw;
     background-color: transparent;
     color: darkslategray;
     border-radius: 5px;
@@ -98,12 +96,18 @@ h3 {
     margin-top: 10vh;
 }
 
+h1 {
+    margin-bottom: 0;
+}
+
 #reset {
+    position: absolute;
     bottom: 0;
+    margin-bottom: 7vh;
     background-color: blanchedalmond;
     border: 2px solid whitesmoke;
     border-radius: 3px;
-    padding: 1vh;
+    padding: 1vh 2vw;
     color: darkslategray;
     transition: transform 0.3s ease;
 }
@@ -130,7 +134,7 @@ h3 {
     #butleft {
         display: flex;
         position: relative;
-        height: 10vh;
+        height: 13vh;
         width: 100%;
         flex-direction: row;
         margin-top: 10vh;
@@ -143,7 +147,7 @@ h3 {
     #butright {
         display: flex;
         position: relative;
-        height: 16vh;
+        height: 21vh;
         width: 100%;
         bottom: 0;
         left: 0;
@@ -151,13 +155,12 @@ h3 {
         flex-direction: row;
         right: 0;
         justify-content: space-evenly;
-        padding-top: 1vh;
-        padding-bottom: 1vh;
+        padding: 1vh 1vw;
     }
 
     header {
         height: 15vh;
-        padding-bottom: 2vh;
+        padding-bottom: 5vh;
     }
 
     .but {
@@ -189,5 +192,15 @@ h3 {
     .ver {
         position: static;
         bottom: auto;
+    }
+
+    #reset {
+        position: static;
+        margin-bottom: 1vh;
+    }
+
+    #plus {
+        margin-bottom: 5vh;
+        margin-top: 5vh;
     }
 }
