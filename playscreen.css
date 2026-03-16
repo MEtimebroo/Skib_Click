@@ -114,6 +114,7 @@ h3 {
 }
 
 .ver {
+    position: absolute;
     bottom: 0;
 }
 
@@ -186,6 +187,7 @@ h3 {
     }
 
     .ver {
+        position: static;
         bottom: auto;
     }
 }
