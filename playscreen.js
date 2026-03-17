@@ -46,7 +46,7 @@ const upgrades = [
     {
         name: "Titan TV Man",
         cost: 163840,
-        income: 163840,
+        income: 16384,
         owned: 0,
         button: document.getElementById("six"),
         costSpan: document.getElementById("sesenta"),
@@ -138,6 +138,7 @@ function updateAllUpgrades() {
 //score values
 const count = document.getElementById("score");
 let score = 0;
+let shown = 0;
 
 //update costs
 function upgradeCost(index) {
@@ -165,7 +166,7 @@ for (let i = 0; i < upgrades.length; i++) {
 
 //update the score
 function updateScore() {
-    count.innerText = score;
+    count.innerText = Math.floor(shown);
 };
 
 plus.addEventListener("click", function() {
@@ -228,8 +229,15 @@ setInterval(function() {
     updateAllUpgrades();
 }, 1000);
 
+function updateDisplay() {
+    shown += (score - shown) * 0.1;
+    updateScore();
+    requestAnimationFrame(updateDisplay);
+}
+
 loadGame();
 updateScore();
 updateAllUpgrades();
+updateDisplay();
 
 window.addEventListener("beforeunload", saveGame());
