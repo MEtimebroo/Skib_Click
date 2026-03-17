@@ -16,7 +16,7 @@ const upgrades = [
     {
         name: "Cameraman",
         cost: 40,
-        income: 5,
+        income: 4,
         owned: 0,
         button: document.getElementById("five"),
         costSpan: document.getElementById("cinco"),
@@ -26,7 +26,7 @@ const upgrades = [
     {
         name: "Speakerman",
         cost: 320,
-        income: 10,
+        income: 32,
         owned: 0,
         button: document.getElementById("ten"),
         costSpan: document.getElementById("diez"),
@@ -36,7 +36,7 @@ const upgrades = [
     {
         name: "Astro Toilet",
         cost: 5120,
-        income: 30,
+        income: 512,
         owned: 0,
         button: document.getElementById("three"),
         costSpan: document.getElementById("treinta"),
@@ -46,7 +46,7 @@ const upgrades = [
     {
         name: "Titan TV Man",
         cost: 163840,
-        income: 60,
+        income: 163840,
         owned: 0,
         button: document.getElementById("six"),
         costSpan: document.getElementById("sesenta"),
@@ -56,7 +56,7 @@ const upgrades = [
     {
         name: "Titan Speakerman",
         cost: 10485760,
-        income: 120,
+        income: 1048576,
         owned: 0,
         button: document.getElementById("twelve"),
         costSpan: document.getElementById("ciento-vente"),
