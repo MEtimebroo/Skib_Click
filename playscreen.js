@@ -65,8 +65,18 @@ const upgrades = [
     }
 ];
 
+//fix for the rest bug
+let isResetting = false;
+
+//score values
+const count = document.getElementById("score");
+let score = 0;
+let shown = 0;
+
 //save game
 function saveGame() {
+    if (isResetting) return;
+
     const saveData = {
         score: score,
         upgrades: upgrades.map(u => ({
@@ -89,6 +99,7 @@ function loadGame() {
     let data = JSON.parse(save);
 
     score = data.score;
+    shown = score;
 
     data.upgrades.forEach((savedUpgrade, index) => {
         upgrades[index].cost = savedUpgrade.cost;
@@ -114,16 +125,18 @@ function loadGame() {
 
     score += totalIncome * diff;
     score = Math.floor(score);
-}
+};
 
 //reset the game
 function resetGame() {
-  localStorage.removeItem("clickerSave");
-  location.reload();
-}
+    isResetting = true;
+    localStorage.removeItem("clickerSave");
+    location.reload()
+};
 
 document.getElementById("reset").addEventListener("click", function(e) {
-    e.preventDefault;
+    console.log("[RESETTING]");
+    e.preventDefault();
     resetGame();
 });
 
@@ -134,11 +147,6 @@ function updateAllUpgrades() {
         upgradeAppearance(i);
     };
 };
-
-//score values
-const count = document.getElementById("score");
-let score = 0;
-let shown = 0;
 
 //update costs
 function upgradeCost(index) {
@@ -166,12 +174,17 @@ for (let i = 0; i < upgrades.length; i++) {
 
 //update the score
 function updateScore() {
-    count.innerText = Math.floor(shown);
+    count.innerText = Math.round(shown);
 };
+
+function updateDisplay() {
+    shown += (score - shown) * 0.1;
+    updateScore();
+    requestAnimationFrame(updateDisplay);
+}
 
 plus.addEventListener("click", function() {
     score++;
-    updateScore();
 
     for (let i = 0; i < upgrades.length; i++) {
         upgradeAppearance(i);
@@ -200,7 +213,6 @@ function buyUpgrade(index) {
         upgrade.cost = Math.ceil(upgrade.cost * 1.3);
         upgrade.income = Math.ceil(upgrade.income * 1.15);
 
-        updateScore();
         upgradeCost(index);
         upgradeInc(index);
         upgradeOwn(index);
@@ -225,19 +237,11 @@ setInterval(function() {
     }
 
     score += totalIncome;
-    updateScore();
     updateAllUpgrades();
 }, 1000);
 
-function updateDisplay() {
-    shown += (score - shown) * 0.1;
-    updateScore();
-    requestAnimationFrame(updateDisplay);
-}
-
 loadGame();
-updateScore();
-updateAllUpgrades();
 updateDisplay();
+updateAllUpgrades();
 
-window.addEventListener("beforeunload", saveGame());
+window.addEventListener("beforeunload", saveGame);
