@@ -63,7 +63,7 @@ const upgrades = [
     {
         name: "Cameraman",
         cost: 150,
-        income: 4,
+        income: 1,
         owned: 0,
         button: document.getElementById("five"),
         costSpan: document.getElementById("cinco"),
@@ -73,7 +73,7 @@ const upgrades = [
     {
         name: "Speakerman",
         cost: 1500,
-        income: 32,
+        income: 10,
         owned: 0,
         button: document.getElementById("ten"),
         costSpan: document.getElementById("diez"),
@@ -83,7 +83,7 @@ const upgrades = [
     {
         name: "Astro Toilet",
         cost: 15000,
-        income: 512,
+        income: 100,
         owned: 0,
         button: document.getElementById("three"),
         costSpan: document.getElementById("treinta"),
@@ -93,7 +93,7 @@ const upgrades = [
     {
         name: "Titan TV Man",
         cost: 163940,
-        income: 16384,
+        income: 1000,
         owned: 0,
         button: document.getElementById("six"),
         costSpan: document.getElementById("sesenta"),
@@ -103,7 +103,7 @@ const upgrades = [
     {
         name: "Titan Speakerman",
         cost: 10485860,
-        income: 1048576,
+        income: 10000,
         owned: 0,
         button: document.getElementById("twelve"),
         costSpan: document.getElementById("ciento-vente"),
@@ -118,9 +118,10 @@ const upUps = [
         cost: 100,
         effect: 2,
         owned: 0,
-        button: document.getElementById("up")
+        button: document.getElementById("up"),
+        twoPly: false
     }
-];
+]
 
 //fix for the rest bug
 let isResetting = false;
@@ -140,6 +141,10 @@ function saveGame() {
             cost: u.cost,
             income: u.income,
             owned: u.owned
+        })),
+        upUps: upUps.map(u => ({
+            owned: u.owned,
+            twoPly: u.twoPly
         })),
         lastUpdate: Date.now()
     };
@@ -182,6 +187,17 @@ function loadGame() {
 
     score += totalIncome * diff;
     score = Math.floor(score);
+
+    if (data.upUps) {
+        data.upUps.forEach((saved, index) => {
+            upUps[index].owned = saved.owned;
+            upUps[index].twoPly = saved.twoPly;
+
+            if (saved.twoPly) {
+                upUps[index].button.disabled = true;
+            }
+        });
+    }
 };
 
 //reset the game
@@ -192,9 +208,21 @@ function resetGame() {
 };
 
 document.getElementById("reset").addEventListener("click", function(e) {
-    console.log("[RESETTING]");
-    e.preventDefault();
-    resetGame();
+    const ru = document.getElementById("ru");
+    const yes = document.getElementById("y");
+    const no = document.getElementById("n");
+    ru.style.display = "block";
+    
+    yes.addEventListener("click", function() {
+        console.log("[RESETTING]");
+        e.preventDefault();
+        resetGame();
+    });
+
+    no.addEventListener("click", function() {
+        ru.style.display = "none";
+        return;
+    });
 });
 
 setInterval(saveGame, 3000);
@@ -229,13 +257,32 @@ for (let i = 0; i < upgrades.length; i++) {
         upgradeAppearance(i);
 };
 
+//makes score more pleasing to look at as it goes up.
+function formatScore(shown) {
+    if (shown >= 1e24) {
+        return (shown / 1e24).toFixed(2).replace(/\.0$/, "") + "Sp";
+    } else if (shown >= 1e21) {
+        return (shown / 1e21).toFixed(2).replace(/\.0$/, "") + "Sx";
+    } else if (shown >= 1e18) {
+        return (shown / 1e18).toFixed(2).replace(/\.0$/, "") + "Qi";
+    } else if (shown >= 1e15) {
+        return (shown / 1e15).toFixed(2).replace(/\.0$/, "") + "Qa";
+    } else if (shown >= 1e12) {
+        return (shown / 1e12).toFixed(2).replace(/\.0$/, "") + "T";
+    } else if (shown >= 1e9) {
+        return (shown / 1e9).toFixed(2).replace(/\.0$/, "") + "B";
+    } else if (shown >= 1e6) {
+        return (shown / 1e6).toFixed(2).replace(/\.0$/, "") + "M";
+    } else if (shown >= 1e3) {
+        return (shown / 1e3).toFixed(2).replace(/\.0$/, "") + "K";
+    } else {
+        return shown.toFixed(1).toString();
+    }
+}
+
 //update the score
 function updateScore() {
-    if (upgrades[0].income >= 5) {
-        count.innerText = Math.floor(shown);
-    } else {
-        count.innerText = shown.toFixed(1);
-    }
+    count.innerText = formatScore(shown);
 };
 
 function updateDisplay() {
@@ -260,10 +307,15 @@ plus.addEventListener("click", function() {
 function upgradeAppearance(index) {
     let upgrade = upgrades[index];
 
-    if (score >= upgrade.cost) {
+    if (score >= upgrade.cost || upgrade.owned >= 1) {
         upgrade.button.style.display = "block";
+        upgrade.button.style.backgroundColor = "transparent";
     } else {
         upgrade.button.style.display = "none";
+    }
+
+    if (score < upgrade.cost && upgrade.owned >= 1) {
+        upgrade.button.style.backgroundColor = "rgba(0, 0, 0, 0.5)";
     }
 };
 
@@ -302,7 +354,9 @@ upUps.forEach((upUps, index) => {
 function upUpsAppearance(index) {
     let up = upUps[index];
 
-    if (score >= up.cost) {
+    if (up.twoPly == true) {
+        up.button.style.display = "none";
+    } else if (score >= up.cost) {
         up.button.style.display = "block";
     } else {
         up.button.style.display = "none";
@@ -311,13 +365,18 @@ function upUpsAppearance(index) {
 
 function upUp(index) {
     let up = upUps[index];
+    if (up.twoPly) return;
+    if (score < up.cost) return;
+
+    up.twoPly = true;
+    up.button.disabled = true;
 
     if (score >= up.cost) {
         score -= up.cost;
         up.owned++;
 
         up.cost = Math.ceil(up.cost * 1.3);
-        upgrades[0].income = upgrades[0].income * 2;
+        upgrades[0].income = upgrades[0].income * up.effect;
         upgradeInc(0);
     }
 };
