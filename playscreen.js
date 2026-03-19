@@ -1,12 +1,52 @@
 //start of variables 
 const plus = document.getElementById("plus");
+const dark = document.getElementById("dark");
+const dMode = [
+    document.body,
+    document.getElementById("butleft"),
+    document.getElementById("butright"),
+    document.getElementById("updiv"),
+    document.getElementById("reset"),
+    document.querySelector("header")
+];
+
+dark.addEventListener("click", function() {
+    dMode.forEach(el => {
+        if (!el) return;
+        const curBg = getComputedStyle(el).backgroundColor;
+        const curBo = getComputedStyle(el).borderColor;
+        const curCo = getComputedStyle(el).color;
+
+        if (curBg === "rgb(255, 228, 196)") {
+            el.style.backgroundColor = "#001B3B";
+        } else if (curBg === "rgb(255, 235, 205)") {
+            el.style.backgroundColor = "#001432";
+        } else if (curBg === "rgb(0, 27, 59)") {
+            el.style.backgroundColor = "#FFE4C4";
+        } else if (curBg === "rgb(0, 20, 50)") {
+            el.style.backgroundColor = "#FFEBCD";
+        }
+        
+        if (curBo === "rgb(245, 245, 245)") {
+            el.style.borderColor = "#0A0A0A";
+        } else if (curBo === "rgb(10, 10, 10)") {
+            el.style.borderColor = "#F5F5F5";
+        }
+        
+        if (curCo === "rgb(47, 79, 79)") {
+            el.style.color = "#D0B0B0";
+        } else if (curCo === "rgb(208, 176, 176)") {
+            el.style.color = "#2F4F4F";
+        }
+    })
+});
 
 //upgrades array
 const upgrades = [
     {
         name: "Skibidi Toilet",
         cost: 10,
-        income: 1,
+        income: 0.1,
         owned: 0,
         button: document.getElementById("one"),
         costSpan: document.getElementById("uno"),
@@ -15,7 +55,7 @@ const upgrades = [
     },
     {
         name: "Cameraman",
-        cost: 40,
+        cost: 150,
         income: 4,
         owned: 0,
         button: document.getElementById("five"),
@@ -25,7 +65,7 @@ const upgrades = [
     },
     {
         name: "Speakerman",
-        cost: 320,
+        cost: 1500,
         income: 32,
         owned: 0,
         button: document.getElementById("ten"),
@@ -35,7 +75,7 @@ const upgrades = [
     },
     {
         name: "Astro Toilet",
-        cost: 5120,
+        cost: 15000,
         income: 512,
         owned: 0,
         button: document.getElementById("three"),
@@ -45,7 +85,7 @@ const upgrades = [
     },
     {
         name: "Titan TV Man",
-        cost: 163840,
+        cost: 163940,
         income: 16384,
         owned: 0,
         button: document.getElementById("six"),
@@ -55,13 +95,23 @@ const upgrades = [
     },
     {
         name: "Titan Speakerman",
-        cost: 10485760,
+        cost: 10485860,
         income: 1048576,
         owned: 0,
         button: document.getElementById("twelve"),
         costSpan: document.getElementById("ciento-vente"),
         incSpan: document.getElementById("twelvr"),
         ownSpan: document.getElementById("ontw")
+    }
+];
+
+const upUps = [
+    {
+        name: "2 Ply",
+        cost: 100,
+        effect: 2,
+        owned: 0,
+        button: document.getElementById("up")
     }
 ];
 
@@ -148,17 +198,17 @@ function updateAllUpgrades() {
     };
 };
 
-//update costs
+//update costs visually
 function upgradeCost(index) {
     upgrades[index].costSpan.innerText = upgrades[index].cost;
 };
 
-//update incomes
+//update incomes visually
 function upgradeInc(index) {
     upgrades[index].incSpan.innerText = upgrades[index].income;
 };
 
-//update amount owned
+//update amount owned visually
 function upgradeOwn(index) {
     upgrades[index].ownSpan.innerText = upgrades[index].owned;
 };
@@ -174,7 +224,11 @@ for (let i = 0; i < upgrades.length; i++) {
 
 //update the score
 function updateScore() {
-    count.innerText = Math.round(shown);
+    if (upgrades[0].income >= 5) {
+        count.innerText = Math.floor(shown);
+    } else {
+        count.innerText = shown.toFixed(1);
+    }
 };
 
 function updateDisplay() {
@@ -189,6 +243,10 @@ plus.addEventListener("click", function() {
     for (let i = 0; i < upgrades.length; i++) {
         upgradeAppearance(i);
     };
+
+    for (let i = 0; i < upUps.length; i++) {
+        upUpsAppearance(i);
+    }
 });
 
 //update the appearance of the buttons
@@ -208,10 +266,9 @@ function buyUpgrade(index) {
 
     if (score >= upgrade.cost) {
         score -= upgrade.cost;
-        upgrade.owned += 1;
+        upgrade.owned++;
 
         upgrade.cost = Math.ceil(upgrade.cost * 1.3);
-        upgrade.income = Math.ceil(upgrade.income * 1.15);
 
         upgradeCost(index);
         upgradeInc(index);
@@ -228,6 +285,36 @@ upgrades.forEach((upgrade, index) => {
     });
 });
 
+//logic for the upgrades' upgrades
+upUps.forEach((upUps, index) => {
+    upUps.button.addEventListener("click", function() {
+        upUp(index);
+    })
+})
+
+function upUpsAppearance(index) {
+    let up = upUps[index];
+
+    if (score >= up.cost) {
+        up.button.style.display = "block";
+    } else {
+        up.button.style.display = "none";
+    }
+};
+
+function upUp(index) {
+    let up = upUps[index];
+
+    if (score >= up.cost) {
+        score -= up.cost;
+        up.owned++;
+
+        up.cost = Math.ceil(up.cost * 1.3);
+        upgrades[0].income = upgrades[0].income * 2;
+        upgradeInc(0);
+    }
+};
+
 //passive income
 setInterval(function() {
     let totalIncome = 0;
@@ -238,10 +325,17 @@ setInterval(function() {
 
     score += totalIncome;
     updateAllUpgrades();
+
+    for (let i = 0; i < upUps.length; i++) {
+        upUpsAppearance(i);
+    }
 }, 1000);
 
 loadGame();
 updateDisplay();
+for (let i = 0; i < upUps.length; i++) {
+    upUpsAppearance(i);
+}
 updateAllUpgrades();
 
 window.addEventListener("beforeunload", saveGame);
