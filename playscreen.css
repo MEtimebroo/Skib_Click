@@ -9,6 +9,10 @@ body {
     touch-action: manipulation;
 }
 
+.dark-mode {
+    filter: invert(1);
+}
+
 header {
     position: absolute;
     top: 0;
@@ -38,6 +42,10 @@ header {
     border: none;
 }
 
+#plus {
+    z-index: 10;
+}
+
 .thi {
     transition: transform 0.3s ease;
 }
@@ -56,40 +64,50 @@ header {
     width: auto;
 }
 
+#updiv {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20vh;
+    background-color: blanchedalmond;
+    border: 2px solid whitesmoke;
+    bottom: 0;
+    width: 75vh;
+    height: 15vh;
+}
+
+#upim {
+    height: 5vh;
+    width: auto;
+}
+
+#up {
+    background-color: transparent;
+    border: 0;
+    color: darkslategray;
+}
+
 #butleft, #butright {
+    position: absolute;
     min-height: 100vh;
+    background-color: blanchedalmond;
+    border: 2px solid whitesmoke;
+    top: 0;
+    width: 25vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 5vh;
+    min-width: 250px;
+    height: 100%;
 }
 
 #butleft {
-    position: absolute;
-    height: 100%;
     left: 0;
-    top: 0;
-    background-color: blanchedalmond;
-    border: 2px solid whitesmoke;
-    display: block;
-    width: 25vw;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding-top: 5vh;
-    min-width: 250px;
 }
 
 #butright {
-    position: absolute;
-    height: 100%;
     right: 0;
-    top: 0;
-    background-color: blanchedalmond;
-    border: 2px solid whitesmoke;
-    display: block;
-    width: 25vw;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding-top: 5vh;
-    min-width: 250px;
 }
 
 h3 {
@@ -98,6 +116,24 @@ h3 {
 
 h1 {
     margin-bottom: 0;
+    display: inline-block;
+}
+
+#dark {
+    position: absolute;
+    left: 0;
+    margin-left: 60vh;
+    margin-top: 5vh;
+    background-color: transparent;
+    border: 0;
+}
+
+#drkim {
+    fill: darkslategray;
+}
+
+#drkim:hover {
+    fill: whitesmoke;
 }
 
 #reset {
@@ -125,37 +161,32 @@ h1 {
 @media (max-width: 768px) {
     #butdiv {
         padding-bottom: 10vh;
+        margin-top: 5vh;
     }
     
     #butleft, #butright {
+        box-sizing: border-box;
         min-height: auto;
+        display: flex;
+        position: relative;
+        width: 100%;
+        left: 0;
+        flex-direction: row;
+        right: 0;
+        justify-content: space-evenly;
     }
     
     #butleft {
-        display: flex;
-        position: relative;
-        height: 13vh;
-        width: 100%;
-        flex-direction: row;
-        margin-top: 10vh;
-        left: 0;
-        right: 0;
-        justify-content: space-evenly;
+        height: 25vh;
         padding-bottom: 5vh;
+        border-bottom: transparent;
+        border-color: whitesmoke;
     }
 
     #butright {
-        display: flex;
-        position: relative;
-        height: 21vh;
-        width: 100%;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        flex-direction: row;
-        right: 0;
-        justify-content: space-evenly;
+        height: 25vh;
         padding: 1vh 1vw;
+        bottom: 0;
     }
 
     header {
@@ -200,7 +231,16 @@ h1 {
     }
 
     #plus {
-        margin-bottom: 5vh;
-        margin-top: 5vh;
+        margin-top: 3vh;
+    }
+
+    #updiv {
+        position: static;
+        box-sizing: border-box;
+        max-width: 96vw;
+    }
+
+    #dark {
+        margin-left: 2vw;
     }
 }
