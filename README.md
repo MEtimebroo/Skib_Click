@@ -1,2 +1,2 @@
 # Skib_Click
-Skibidi Clicker v1.4.8-beta (Fixes update latency and subsequent bugs affecting the reset button.)
+Skibidi Clicker v1.5.8-beta (Adds dark mode support and implements upgrades for upgrades.)
