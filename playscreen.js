@@ -16,6 +16,7 @@ dark.addEventListener("click", function() {
         const curBg = getComputedStyle(el).backgroundColor;
         const curBo = getComputedStyle(el).borderColor;
         const curCo = getComputedStyle(el).color;
+        const heBo = getComputedStyle(el).borderBottomColor;
 
         if (curBg === "rgb(255, 228, 196)") {
             el.style.backgroundColor = "#001B3B";
@@ -37,6 +38,12 @@ dark.addEventListener("click", function() {
             el.style.color = "#D0B0B0";
         } else if (curCo === "rgb(208, 176, 176)") {
             el.style.color = "#2F4F4F";
+        }
+
+        if (heBo === "rgb(245, 245, 245)") {
+            el.style.borderBottomColor = "#0A0A0A";
+        } else if (heBo === "rgb(10, 10, 10)") {
+            el.style.borderBottomColor = "#F5F5F5";
         }
     })
 });
