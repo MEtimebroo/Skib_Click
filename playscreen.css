@@ -177,10 +177,12 @@ h1 {
 }
 
 #ru {
+    position: absolute;
     display: flex;
     flex-direction: column;
     align-items: center;
     background-color: bisque;
+    color: darkslategray;
     border: 2px solid whitesmoke;
     width: 40vw;
     height: 25vh;
@@ -290,6 +292,7 @@ h1 {
     }
 
     #ru {
+        margin-top: 50vh;
         width: 50vh;
         justify-self: center;
     }

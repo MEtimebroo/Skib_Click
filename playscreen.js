@@ -1,16 +1,20 @@
 //start of variables 
 const plus = document.getElementById("plus");
 const dark = document.getElementById("dark");
-const dMode = [
-    document.body,
-    document.getElementById("butleft"),
-    document.getElementById("butright"),
-    document.getElementById("updiv"),
-    document.getElementById("reset"),
-    document.querySelector("header")
-];
+
 
 dark.addEventListener("click", function() {
+    const dMode = [
+        document.body,
+        document.getElementById("butleft"),
+        document.getElementById("butright"),
+        document.getElementById("updiv"),
+        document.querySelector("header"),
+        document.getElementById("ru"),
+        ...document.querySelectorAll(".ui"),
+        ...document.querySelectorAll(".but")
+    ];
+
     dMode.forEach(el => {
         if (!el) return;
         const curBg = getComputedStyle(el).backgroundColor;
@@ -58,7 +62,8 @@ const upgrades = [
         button: document.getElementById("one"),
         costSpan: document.getElementById("uno"),
         incSpan: document.getElementById("unr"),
-        ownSpan: document.getElementById("on")
+        ownSpan: document.getElementById("on"),
+        img: document.getElementById("o")
     },
     {
         name: "Cameraman",
@@ -68,7 +73,8 @@ const upgrades = [
         button: document.getElementById("five"),
         costSpan: document.getElementById("cinco"),
         incSpan: document.getElementById("fivr"),
-        ownSpan: document.getElementById("onf")
+        ownSpan: document.getElementById("onf"),
+        img: document.getElementById("f")
     },
     {
         name: "Speakerman",
@@ -78,7 +84,8 @@ const upgrades = [
         button: document.getElementById("ten"),
         costSpan: document.getElementById("diez"),
         incSpan: document.getElementById("tenr"),
-        ownSpan: document.getElementById("ont")
+        ownSpan: document.getElementById("ont"),
+        img: document.getElementById("t")
     },
     {
         name: "Astro Toilet",
@@ -88,7 +95,8 @@ const upgrades = [
         button: document.getElementById("three"),
         costSpan: document.getElementById("treinta"),
         incSpan: document.getElementById("thr"),
-        ownSpan: document.getElementById("onth")
+        ownSpan: document.getElementById("onth"),
+        img: document.getElementById("th")
     },
     {
         name: "Titan TV Man",
@@ -98,7 +106,8 @@ const upgrades = [
         button: document.getElementById("six"),
         costSpan: document.getElementById("sesenta"),
         incSpan: document.getElementById("sixr"),
-        ownSpan: document.getElementById("ons")
+        ownSpan: document.getElementById("ons"),
+        img: document.getElementById("s")
     },
     {
         name: "Titan Speakerman",
@@ -108,7 +117,8 @@ const upgrades = [
         button: document.getElementById("twelve"),
         costSpan: document.getElementById("ciento-vente"),
         incSpan: document.getElementById("twelvr"),
-        ownSpan: document.getElementById("ontw")
+        ownSpan: document.getElementById("ontw"),
+        img: document.getElementById("tw")
     }
 ];
 
@@ -309,13 +319,13 @@ function upgradeAppearance(index) {
 
     if (score >= upgrade.cost || upgrade.owned >= 1) {
         upgrade.button.style.display = "block";
-        upgrade.button.style.backgroundColor = "transparent";
+        upgrade.img.style.opacity = "1";
     } else {
         upgrade.button.style.display = "none";
     }
 
     if (score < upgrade.cost && upgrade.owned >= 1) {
-        upgrade.button.style.backgroundColor = "rgba(0, 0, 0, 0.5)";
+        upgrade.img.style.opacity = "0.5";
     }
 };
 
