@@ -12,7 +12,8 @@ dark.addEventListener("click", function() {
         document.querySelector("header"),
         document.getElementById("ru"),
         ...document.querySelectorAll(".ui"),
-        ...document.querySelectorAll(".but")
+        ...document.querySelectorAll(".but"),
+        ...document.querySelectorAll(".up")
     ];
 
     dMode.forEach(el => {
