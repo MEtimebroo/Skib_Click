@@ -73,29 +73,38 @@ header {
     position: absolute;
     display: flex;
     overflow-x: auto;
-    justify-content: center;
+    overflow-y: hidden;
+    white-space: nowrap;
+    justify-content: flex-start;
     margin-bottom: 20vh;
     background-color: blanchedalmond;
     border: 2px solid whitesmoke;
     bottom: 0;
     width: 75vh;
     height: 15vh;
+    padding: 2vh 2vw auto 2vw;
+    scroll-behavior: smooth;
 }
 
-#upim {
+#updiv::-webkit-scrollbar {
+    height: 10px;
+}
+
+.thi {
     height: 5vh;
     width: auto;
 }
 
-#up {
+.up {
     background-color: transparent;
     border: 0;
     color: darkslategray;
     min-width: 5vh;
     display: none;
+    flex: 0 0 auto;
 }
 
-#up:disabled {
+.up:disabled {
     display: none;
 }
 
@@ -124,7 +133,12 @@ header {
 
 h3 {
     position: absolute;
-    margin-top: 10vh;
+    margin-top: 8vh;
+}
+
+#puh {
+    position: absolute;
+    margin-top: 13vh;
 }
 
 h1 {
@@ -251,6 +265,15 @@ h1 {
     #updiv {
         margin-top: 105vh;
         margin-bottom: 12vh;
+        position: static;
+        box-sizing: border-box;
+        max-width: 96vw;
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
+
+    #updiv::-webkit-scrollbar {
+        display: none;
     }
 
     #o, #f, #t, #th, #s {
@@ -277,12 +300,6 @@ h1 {
         margin-top: 20vh;
     }
 
-    #updiv {
-        position: static;
-        box-sizing: border-box;
-        max-width: 96vw;
-    }
-
     #dark {
         margin-left: 2vw;
     }
@@ -298,6 +315,11 @@ h1 {
     }
 
     h3 {
-        margin-top: 12vh;
+        margin-top: 10vh;
+    }
+
+    #puh {
+        position: absolute;
+        margin-top: 15vh;
     }
 }
