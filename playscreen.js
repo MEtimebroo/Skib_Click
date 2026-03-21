@@ -215,6 +215,7 @@ function loadGame() {
     //offline stuff
     let now = Date.now();
     let diff = (now - data.lastUpdate) / 1000;
+    diff = Math.max(0, Math.min(diff, 3600));
 
     let totalIncome = 0;
 
