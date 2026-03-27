@@ -91,7 +91,7 @@ const upgrades = [
     {
         name: "Astro Toilet",
         cost: 15000,
-        income: 100,
+        income: 50,
         owned: 0,
         button: document.getElementById("three"),
         costSpan: document.getElementById("treinta"),
@@ -102,7 +102,7 @@ const upgrades = [
     {
         name: "Titan TV Man",
         cost: 163940,
-        income: 1000,
+        income: 275,
         owned: 0,
         button: document.getElementById("six"),
         costSpan: document.getElementById("sesenta"),
@@ -113,7 +113,7 @@ const upgrades = [
     {
         name: "Titan Speakerman",
         cost: 10485860,
-        income: 10000,
+        income: 1500,
         owned: 0,
         button: document.getElementById("twelve"),
         costSpan: document.getElementById("ciento-vente"),
@@ -150,6 +150,23 @@ const upC = {
     lens: false
 };
 
+const upC2 = {
+    name: "2-4mm Lens",
+    cost: 5000,
+    effect: 2,
+    owned: 0,
+    button: document.getElementById("up3"),
+    twoLens: false
+};
+
+const ind = {
+    name: "Industrial Roll",
+    cost: 10000,
+    effect: 2,
+    owned: 0, button: document.getElementById("up4"),
+    roll: false
+};
+
 //fix for the reset bug
 let isResetting = false;
 
@@ -182,6 +199,14 @@ function saveGame() {
         upC: {
             owned: upC.owned,
             lens: upC.lens
+        },
+        upC2: {
+            owned: upC2.owned,
+            twoLens: upC2.twoLens
+        },
+        ind: {
+            owned: ind.owned,
+            roll: ind.roll
         },
         lastUpdate: Date.now()
     };
@@ -253,10 +278,29 @@ function loadGame() {
         }
     }
 
+    if (data.upC2) {
+        upC2.owned = data.upC2.owned;
+        upC2.twoLens = data.upC2.twoLens;
+
+        if (data.upC2.twoLens) {
+            upC2.button.disabled = "true";
+        }
+    }
+
+    if (data.ind) {
+        ind.owned = data.ind.owned;
+        ind.roll = data.ind.roll;
+
+        if (data.ind.roll) {
+            ind.button.disabled = "true";
+        }
+    }
+
     updateAllUpgrades();
     upUpsAppearance();
     upAppearance();
     upCAppearance();
+    indAppearance();
 };
 
 //reset the game
@@ -309,7 +353,9 @@ function upgradeOwn(index) {
 
 //makes score more pleasing to look at as it goes up.
 function formatScore(shown) {
-    if (shown >= 1e24) {
+    if (shown >= 1e27) {
+        return (shown / 1e27).toFixed(2).replace(/\.0$/, "") + "Oc";
+    } else if (shown >= 1e24) {
         return (shown / 1e24).toFixed(2).replace(/\.0$/, "") + "Sp";
     } else if (shown >= 1e21) {
         return (shown / 1e21).toFixed(2).replace(/\.0$/, "") + "Sx";
@@ -350,6 +396,8 @@ plus.addEventListener("click", function() {
     upUpsAppearance();
     upAppearance();
     upCAppearance();
+    upC2Appearance();
+    indAppearance();
 });
 
 //update the appearance of the buttons
@@ -396,15 +444,23 @@ upgrades.forEach((upgrade, index) => {
 //logic for the upgrades' upgrades
 upUps.button.addEventListener("click", function() {
     upUp();
-})
+});
 
 up.button.addEventListener("click", function() {
     upg();
-})
+});
 
 upC.button.addEventListener("click", function() {
     upCa();
-})
+});
+
+upC2.button.addEventListener("click", function() {
+    upCa2();
+});
+
+ind.button.addEventListener("click", function() {
+    indy();
+});
 
 function upUpsAppearance() {
     if (upUps.twoPly == true) {
@@ -435,6 +491,26 @@ function upCAppearance() {
         upC.button.style.display = "none";
     }
 }
+
+function upC2Appearance() {
+    if (upC2.twoLens == true && upC2.owned >= 1) {
+        upC2.button.style.display = "none";
+    } else if (score >= upC2.cost) {
+        upC2.button.style.display = "block";
+    } else {
+        upC2.button.style.display = "none";
+    }
+}
+
+function indAppearance() {
+    if (ind.roll == true && ind.owned >= 1) {
+        ind.button.style.display = "none";
+    } else if (score >= ind.cost) {
+        ind.button.style.display = "block";
+    } else {
+        ind.button.style.display = "none";
+    }
+};
 
 function upUp() {
     if (upUps.twoPly) return;
@@ -484,6 +560,36 @@ function upCa() {
     }
 };
 
+function upCa2() {
+    if (upC2.twoLens) return;
+    if (score < upC2.cost) return;
+
+    upC2.twoLens = true;
+    upC2.button.disabled = true;
+    if (score >= upC2.cost) {
+        score -= upC2.cost;
+        upC2.owned++;
+
+        upgrades[1].income = upgrades[1].income * upC.effect;
+        upgradeInc(1);
+    }
+};
+
+function indy() {
+    if (ind.roll) return;
+    if (score < ind.cost) return;
+
+    ind.roll = true;
+    ind.button.disabled = true;
+    if (score >= ind.cost) {
+        score -= ind.cost;
+        ind.owned++;
+
+        upgrades[0].income = upgrades[0].income * ind.effect;
+        upgradeInc(0);
+    }
+};
+
 //passive income
 setInterval(function() {
     let totalIncome = 0;
@@ -499,12 +605,16 @@ setInterval(function() {
     upUpsAppearance();
     upAppearance();
     upCAppearance();
+    upC2Appearance();
+    indAppearance();
 }, 1000);
 
 updateDisplay();
 upUpsAppearance();
 upAppearance();
 upCAppearance();
+upC2Appearance();
+indAppearance();
 updateAllUpgrades();
 
 window.addEventListener("beforeunload", saveGame);
