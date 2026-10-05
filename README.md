@@ -1,5 +1,5 @@
 # Skib_Click
-Skibidi Clicker v1.9.12-beta (Adds new upgrade and fixes save and load bugs.)
+Skibidi Clicker v1.9.12-beta (Adds looping background music to the playscreen.)
 
 Game Designer: MEtimebroo<br>
 Lead Programmer: MEtimebroo<br>
