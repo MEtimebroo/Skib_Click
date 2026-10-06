@@ -1,5 +1,5 @@
 # Skibidi_Clicker
-Skibidi Clicker v1.9.12-beta (Adds looping background music to the playscreen.)
+Skibidi Clicker v1.9.13-beta (Adjusts score increasing animation.)
 
 Game Designer: MEtimebroo<br>
 Lead Programmer: MEtimebroo<br>
