@@ -1,4 +1,4 @@
-# Skib_Click
+# Skibidi_Clicker
 Skibidi Clicker v1.9.12-beta (Adds looping background music to the playscreen.)
 
 Game Designer: MEtimebroo<br>
