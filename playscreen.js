@@ -230,6 +230,25 @@ dark.addEventListener("click", function() {
     });
 });
 
+//music button
+const play = document.getElementById("play");
+
+const check = {
+    playing: false
+};
+
+//make music play
+play.addEventListener("click", () => {
+    if (check.playing) {
+        check.playing = false;
+        document.getElementById("music").pause();
+        document.getElementById("music").currentTime = 0;
+    } else {
+        check.playing = true;
+        document.getElementById("music").play();
+    };
+});
+
 //upgrades array
 const upgrades = [
     {
