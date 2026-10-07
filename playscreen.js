@@ -138,9 +138,6 @@ function loadGame() {
     //visual continuity
     updateAllUpgrades();
     updateAllOne();
-
-    //remove old saves after loading
-    localStorage.removeItem("clickerSave");
 };
 
 //resetting function
