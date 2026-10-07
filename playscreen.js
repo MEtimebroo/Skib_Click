@@ -363,7 +363,7 @@ const one = [
 //load game at the beginning
 loadGame();
 
-setInterval(saveGame, 300000);
+setInterval(saveGame, 1000);
 
 //update appearances of the upgrades
 function upgradeAppearance(index) {
