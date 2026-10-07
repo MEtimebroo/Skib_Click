@@ -323,6 +323,10 @@ h1 {
         margin-left: 2vw;
     }
 
+    #play {
+        margin-right: 2vw;
+    }
+
     .ui {
         width: 20vw;
     }
