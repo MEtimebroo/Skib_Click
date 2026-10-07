@@ -1,5 +1,5 @@
 # Skibidi_Clicker
-Skibidi Clicker v1.9.13-beta (Adjusts score increasing animation.)
+Skibidi Clicker v1.10.13-beta (Adjusts score increasing animation and fixes looping errors.)
 
 Game Designer: MEtimebroo<br>
 Lead Programmer: MEtimebroo<br>
