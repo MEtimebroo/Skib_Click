@@ -54,15 +54,24 @@ function updateDisplay() {
 };
 
 const plus = document.getElementById("plus");
+const press = document.getElementById("press");
+
+press.volume = 0.25;
 
 //score increases per click
 plus.addEventListener("click", () => {
     saved++;
     shown = saved;
+    press.play();
 
     updateAllUpgrades();
     updateAllOne();
-})
+});
+
+plus.addEventListener("mouseup", () => {
+    press.pause();
+    press.currentTime = 0;
+});
 
 //save game
 function saveGame() {
